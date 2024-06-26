@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+
+
+
+// export default App;
+
+import React, { useState, useEffect } from "react";
+import Tabs from './Components/Tabs';
+import "./App.css";
+import SearchBar from "./Components/SearchBar";
+import RecipeCard from "./Components/RecipeCard";
+const searchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [loader,setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [query, setQuery] = useState("");
+  const [recipes, setRecipes] = useState([]);
+  
+  // search for the recipe
+  const searchRecipes = async () => {
+    setIsLoading(true);
+    const url = searchApi + query
+    const res = await fetch(url);
+    const data = await res.json();
+    setRecipes(data.meals);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    searchRecipes()
+  }, []);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    searchRecipes();
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Tabs/>
+
+    <div className="Rec_container">
+      <h2>Our Food Recipes</h2>
+      <SearchBar
+        isLoading={isLoading}
+        query={query}
+        setQuery={setQuery}
+        handleSubmit={handleSubmit}
+      />
+      <div className="recipes">
+        
+        {recipes ? recipes.map(recipe => (
+          <RecipeCard
+             key={recipe.idMeal}
+             recipe={recipe}
+          />
+        )) : "No Results."}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
