@@ -1,0 +1,39 @@
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.image-grid img {
+  width: calc(20.33% - 20px); 
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.image-grid img:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.recipe-item {
+  width: calc(20.33% - 20px);
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.recipe-item img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #555;
+}

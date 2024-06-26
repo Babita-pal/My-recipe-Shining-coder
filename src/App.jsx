@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import ImageGrid from './components/ImageGrid';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState('');
+  const [call, setCall] = useState(false);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const getData = (searchTerm = 'banana') => {
+    setLoading(true);
+    fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/?search=${searchTerm}&key=8d488d17-fae0-474f-a48f-b7eab7d8c578`, {
+      method: 'GET',
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((res) => {
+        setData(res.data.recipes);
+        console.log('API data:', res.data.recipes);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    getData(search);
+  }, [call]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setCall(prev => !prev);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <form onSubmit={handleSearch}>
+        <input 
+          type="text" 
+          value={search} 
+          onChange={(e) => setSearch(e.target.value)} 
+          placeholder="Search for a recipe..." 
+        />
+        <button type="submit">Search</button>
+      </form>
+      <ImageGrid data={data} loading={loading} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
