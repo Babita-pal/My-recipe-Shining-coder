@@ -1,0 +1,100 @@
+.header {
+    height: 400px;
+    width: 99.6vw;
+    border: 2px solid black;
+    background-image: url('../assets/1.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.9;
+
+  }
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0  ;
+}
+.Recipe{
+    color:white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 120px;
+}
+.Recipe h1,
+.Recipe p {
+    margin: 0; /* Reset margin for h1 and p to remove extra space */
+    padding: 0; /* Reset padding for h1 and p */
+}
+.login{
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+ button{
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background and color */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add initial shadow */
+ }
+
+ button:hover {
+    background-color: #f0e15e; /* Change background color on hover */
+    color: #fff; /* Change text color on hover */
+}
+
+.spoon{
+    color: white;
+    font-size: x-large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+    .header {
+        height: auto; /* Allow the header to adjust height */
+        padding: 20px; /* Add padding for smaller screens */
+    }
+
+    .Recipe {
+        margin: 60px; /* Reduce margin for smaller screens */
+        text-align: center; /* Center text for smaller screens */
+    }
+
+    .login {
+        justify-content: center; /* Center buttons for smaller screens */
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    button {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Recipe {
+        margin: 30px; /* Further reduce margin for very small screens */
+    }
+
+    button {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
+
+
+
+
+
+
+
+ 
