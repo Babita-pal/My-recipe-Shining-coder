@@ -1,5 +1,4 @@
 
-// export default App;
 
 import React, { useState, useEffect } from "react";
 import Tabs from './Components/Tabs';
@@ -7,6 +6,8 @@ import "./App.css";
 import SearchBar from "./Components/SearchBar";
 import RecipeCard from "./Components/RecipeCard";
 import Header from './Components/Header';
+import Footer from './Components/Footer';
+
 
 const searchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 
@@ -59,6 +60,8 @@ function App() {
         )) : "No Results."}
       </div>
     </div>
+    <Footer />
+
     </>
   );
 }
