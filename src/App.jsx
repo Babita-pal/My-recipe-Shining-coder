@@ -6,7 +6,7 @@ import "./App.css";
 import SearchBar from "./Components/SearchBar";
 import RecipeCard from "./Components/RecipeCard";
 import Header from './Components/Header';
-import Footer from './Components/Footer';
+// import Footer from './Components/Footer';
 
 
 const searchApi = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
@@ -60,7 +60,7 @@ function App() {
         )) : "No Results."}
       </div>
     </div>
-    <Footer />
+    {/* <Footer /> */}
 
     </>
   );
